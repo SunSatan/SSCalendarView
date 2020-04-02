@@ -27,11 +27,10 @@
     self.calendarView = [[SSCalendarView alloc] init];
     [self.view addSubview:self.calendarView];
     
-    self.calendarView.frame = CGRectMake(0, 100, 375, 300);
+    self.calendarView.frame = CGRectMake(0, 100, 345, 300);
     self.calendarView.calendarHeaderViewHeight = 20;
     self.calendarView.calendarFooterViewHeight = 20;
 }
-
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

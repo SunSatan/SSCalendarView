@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class SSCalendarMonthCell;
+@class SSCalendarDayCell, SSCalendarMonthCell;
+
+@protocol SSCalendarMonthCellDataSource <NSObject>
+
+@optional
+
+
+
+@end
 
 @interface SSCalendarMonthCell : UICollectionViewCell
 

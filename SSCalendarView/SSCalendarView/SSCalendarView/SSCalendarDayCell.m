@@ -35,8 +35,11 @@
 - (void)basicConfigure
 {
     [self loadSelectBackgroundView];
+    [self loadTopLabel];
     [self loadDayLabel];
     [self loadDetailLabel];
+    [self loadDot];
+    self.clipsToBounds = YES;
 }
 
 #pragma mark - load subview
@@ -50,13 +53,35 @@
     _selectBackgroundView = [[UIView alloc] init];
     [self.contentView addSubview:_selectBackgroundView];
     
-    _selectBackgroundView.backgroundColor = [UIColor orangeColor];
+    _selectBackgroundView.layer.cornerRadius = 5;
+    _selectBackgroundView.clipsToBounds = YES;
     
     _selectBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
     [_selectBackgroundView.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = YES;
     [_selectBackgroundView.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
-    [_selectBackgroundView.widthAnchor   constraintEqualToAnchor:self.contentView.widthAnchor  multiplier:0.9].active = YES;
-    [_selectBackgroundView.heightAnchor  constraintEqualToAnchor:self.contentView.heightAnchor multiplier:0.9].active = YES;
+    [_selectBackgroundView.widthAnchor   constraintEqualToAnchor:self.contentView.widthAnchor  multiplier:0.98].active = YES;
+    [_selectBackgroundView.heightAnchor  constraintEqualToAnchor:self.contentView.heightAnchor multiplier:0.98].active = YES;
+}
+
+- (void)loadTopLabel
+{
+    if (_topLabel) {
+        return;
+    }
+    
+    _topLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:_topLabel];
+    
+    _topLabel.textAlignment = NSTextAlignmentCenter;
+    _topLabel.font = [UIFont systemFontOfSize:10];
+    _topLabel.textColor = [UIColor blackColor];
+    _topLabel.text = @"清明节";
+    
+    _topLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [_topLabel.topAnchor    constraintEqualToAnchor:_selectBackgroundView.topAnchor constant:4].active = YES;
+    [_topLabel.leftAnchor   constraintEqualToAnchor:_selectBackgroundView.leftAnchor].active = YES;
+    [_topLabel.rightAnchor  constraintEqualToAnchor:_selectBackgroundView.rightAnchor].active = YES;
+    [_topLabel.heightAnchor constraintEqualToConstant:8].active = YES;
 }
 
 - (void)loadDayLabel
@@ -68,17 +93,18 @@
     _dayLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_dayLabel];
     
-    _dayLabel.backgroundColor = [UIColor redColor];
     _dayLabel.textAlignment = NSTextAlignmentCenter;
     _dayLabel.font = [UIFont systemFontOfSize:16];
-    _dayLabel.textColor = kDarkBlueColor;
+    _topLabel.adjustsFontSizeToFitWidth = YES;
+    _dayLabel.textColor = [UIColor blackColor];
     _dayLabel.text = @"20";
     
-    CGFloat width = self.contentView.frame.size.width;
-    CGFloat height = 16;
-    CGFloat x = 0;
-    CGFloat y = (self.contentView.frame.size.height / 2) - height;
-    _dayLabel.frame = CGRectMake(x, y, width, height);
+    _dayLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [_dayLabel.topAnchor    constraintEqualToAnchor:_topLabel.bottomAnchor constant:2].active = YES;
+    [_dayLabel.leftAnchor   constraintEqualToAnchor:_selectBackgroundView.leftAnchor].active = YES;
+    [_dayLabel.rightAnchor  constraintEqualToAnchor:_selectBackgroundView.rightAnchor].active = YES;
+    [_dayLabel.heightAnchor constraintEqualToConstant:14].active = YES;
+    
 }
 
 - (void)loadDetailLabel
@@ -90,24 +116,36 @@
     _detailLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_detailLabel];
     
-    _detailLabel.backgroundColor = [UIColor greenColor];
     _detailLabel.textAlignment = NSTextAlignmentCenter;
     _detailLabel.font = [UIFont systemFontOfSize:10];
-    _detailLabel.textColor = kDarkBlueColor;
+    _topLabel.adjustsFontSizeToFitWidth = YES;
+    _detailLabel.textColor = [UIColor blackColor];
     _detailLabel.text = @"十五";
     
-    CGFloat width = self.contentView.frame.size.width;
-    CGFloat height = 12;
-    CGFloat x = 0;
-    CGFloat y = (self.contentView.frame.size.height / 2);
-    _detailLabel.frame = CGRectMake(x, y, width, height);
+    _detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [_detailLabel.topAnchor    constraintEqualToAnchor:_dayLabel.bottomAnchor constant:2].active = YES;
+    [_detailLabel.leftAnchor   constraintEqualToAnchor:_selectBackgroundView.leftAnchor].active = YES;
+    [_detailLabel.rightAnchor  constraintEqualToAnchor:_selectBackgroundView.rightAnchor].active = YES;
+    [_detailLabel.heightAnchor constraintEqualToConstant:8].active = YES;
 }
 
-#pragma mark - binding
-
-- (void)binding
+- (void)loadDot
 {
+    if (_dot) {
+        return;
+    }
     
+    _dot = [[UIView alloc] init];
+    [self.contentView addSubview:_dot];
+    
+    _dot.layer.cornerRadius = 4;
+    _dot.clipsToBounds = YES;
+    
+    _dot.translatesAutoresizingMaskIntoConstraints = NO;
+    [_dot.topAnchor     constraintEqualToAnchor:_detailLabel.bottomAnchor constant:1].active = YES;
+    [_dot.centerXAnchor constraintEqualToAnchor:_selectBackgroundView.centerXAnchor].active = YES;
+    [_dot.widthAnchor   constraintEqualToConstant:8].active = YES;
+    [_dot.heightAnchor  constraintEqualToConstant:8].active = YES;
 }
 
 @end

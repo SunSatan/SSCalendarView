@@ -67,8 +67,8 @@
 {
     static int i = 1;
     NSLog(@"loadSubview %d次", i++);
-    [self loadHeaderView];
-    [self loadFooterView];
+    [self updateHeaderView];
+    [self updateFooterView];
 }
 
 - (void)loadHeaderBackgroundView
@@ -132,7 +132,7 @@
     _calendarFooterBackgroundViewHeightConstraint.active = YES;
 }
 
-- (void)loadHeaderView
+- (void)updateHeaderView
 {
     if (self.dataSource
         && [self.dataSource respondsToSelector:@selector(calendarViewForCalendarHeaderView:)]) {
@@ -152,7 +152,7 @@
     [self.calendarHeaderBackgroundView addSubview:self.calendarHeaderView];
 }
 
-- (void)loadFooterView
+- (void)updateFooterView
 {
     if (self.dataSource
         && [self.dataSource respondsToSelector:@selector(calendarViewForCalendarFooterView:)]) {
@@ -211,7 +211,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 21;
+    return 30;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

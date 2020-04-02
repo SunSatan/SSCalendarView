@@ -13,8 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SSCalendarDayCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIView  *selectBackgroundView;
+@property (nonatomic, strong) UILabel *topLabel;
 @property (nonatomic, strong) UILabel *dayLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
+@property (nonatomic, strong) UIView  *dot;
 
 @end
 
